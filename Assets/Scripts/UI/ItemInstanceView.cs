@@ -11,7 +11,7 @@ namespace GInventory
     {
         [SerializeField] private TextMeshProUGUI _quantityLabel;
         [SerializeField] private Image _icon;
-        [SerializeField] private Button _button;
+        [SerializeField] private ClickableObject _button;
         public CanvasGroup _canvasGroup; // todo: rename
         public bool IsEmpty
         {
@@ -25,9 +25,14 @@ namespace GInventory
 
         private void Awake()
         {
-            _button.onClick.AddListener(() =>
+            var inventoryManager = FindObjectOfType<InventoryClickManager>();
+            _button.OnLeftClick.AddListener(() =>
             {
-                FindObjectOfType<InventoryManager>().HandleClick(this);
+                inventoryManager.HandleClick(this);
+            });
+            _button.OnRightClick.AddListener(() =>
+            {
+                inventoryManager.HandleRightClick(this);
             });
             _quantityLabel.gameObject.SetActive(false);
         }
@@ -56,7 +61,7 @@ namespace GInventory
             {
                 if(quantity == 0)
                 {
-                    Item = null;
+                    UnsetItem();
                 }
                 else
                 {

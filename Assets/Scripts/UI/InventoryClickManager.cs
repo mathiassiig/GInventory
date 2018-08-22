@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System;
 
 namespace GInventory
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryClickManager : MonoBehaviour
     {
         [SerializeField] private RectTransform _mainCanvas;
         private ItemInstanceView _originalLiftedItem;
         private ItemInstanceView _clonedLiftedItem;
         private bool _lifting;
+        private Action OnCancel;
+        private Action<ItemInstanceView> OnComplete;
 
         public void HandleClick(ItemInstanceView item)
         {
@@ -20,8 +23,20 @@ namespace GInventory
             }
             else
             {
-                Move(_originalLiftedItem, item);
-                CancelLift();
+                OnComplete(item);
+                FinishLift();
+            }
+        }
+
+        public void HandleRightClick(ItemInstanceView item)
+        {
+            if (!_lifting && !item.IsEmpty)
+            {
+                Lift(item, true);
+            }
+            else if(_lifting)
+            {
+                OnCancel();
             }
         }
 
@@ -29,16 +44,47 @@ namespace GInventory
         {
             var fromItem = from.Item;
             var toItem = to.Item;
-            to.SetItem(fromItem);
-            from.SetItem(toItem);
+            if(fromItem != null && toItem != null && fromItem.ItemType == toItem.ItemType)
+            {
+                var overflow = toItem.Add(fromItem.Quantity.Value);
+                fromItem.Quantity.Value = overflow;
+            }
+            else // swap
+            {
+                to.SetItem(fromItem);
+                from.SetItem(toItem);
+            }
         }
 
-        public void Lift(ItemInstanceView original)
+        public void Lift(ItemInstanceView original, bool half = false)
         {
             _originalLiftedItem = original;
             _clonedLiftedItem = Instantiate(_originalLiftedItem).GetComponent<ItemInstanceView>();
             _clonedLiftedItem._canvasGroup.blocksRaycasts = false;
             _clonedLiftedItem._canvasGroup.interactable = false;
+            _clonedLiftedItem.SetItem(new ItemInstance(_originalLiftedItem.Item));
+            if(half && _originalLiftedItem.Item.Quantity.Value > 1)
+            {
+                var amountToLift = original.Item.Quantity.Value / 2;
+                var amountLeft = original.Item.Quantity.Value - amountToLift;
+                original.Item.Quantity.Value = amountLeft;
+                _clonedLiftedItem.Item.Quantity.Value = amountToLift;
+                OnCancel = () =>
+                {
+                    original.Item.Quantity.Value = amountToLift + amountLeft;
+                    CancelLift();
+                };
+                OnComplete = (target) =>
+                {
+                    target.SetItem(new ItemInstance(_originalLiftedItem.Item));
+                    target.Item.Quantity.Value = amountToLift;
+                };
+            }
+            else
+            {
+                OnCancel = CancelLift;
+                OnComplete = (target) => Move(_originalLiftedItem, target);
+            }
             original._canvasGroup.alpha = 0.33f;
             _clonedLiftedItem.transform.SetParent(_mainCanvas);
             _clonedLiftedItem.transform.localScale = Vector3.one;
@@ -58,13 +104,18 @@ namespace GInventory
             });
         }
 
-        private void CancelLift()
+        private void FinishLift()
         {
             _lifting = false;
             Destroy(_clonedLiftedItem.gameObject);
             _clonedLiftedItem = null;
             _originalLiftedItem._canvasGroup.alpha = 1;
             _originalLiftedItem = null;
+        }
+
+        private void CancelLift()
+        {
+            FinishLift();
         }
 
         private void Update()
