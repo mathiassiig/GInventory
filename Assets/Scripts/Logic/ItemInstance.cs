@@ -10,6 +10,12 @@ namespace GInventory
         public ReactiveProperty<int> Quantity = new ReactiveProperty<int>();
         public ItemType ItemType;
 
+        public ItemInstance()
+        {
+            ItemType = null;
+            Quantity.Value = 0;
+        }
+
         public ItemInstance(ItemInstance i)
         {
             ItemType = i.ItemType;

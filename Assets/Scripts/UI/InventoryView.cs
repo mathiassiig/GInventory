@@ -13,19 +13,6 @@ namespace GInventory
         private int _visualCapacity;
         private List<ItemInstanceView> _itemInstanceViews;
 
-        public void Initialize(int capacity)
-        {
-            var itemInstancePrefab = Resources.Load<GameObject>("Prefabs/ItemInstanceView");
-
-            _itemInstanceViews = new List<ItemInstanceView>();
-            for (int i = 0; i < capacity; i++)
-            {
-                var itemInstance = Instantiate(itemInstancePrefab, _itemsContent);
-                _itemInstanceViews.Add(itemInstance.GetComponent<ItemInstanceView>());
-            }
-            _visualCapacity = capacity;
-        }
-
         public bool Add(ItemInstance item)
         {
             var existing = _itemInstanceViews.Where(x => x.Item != null).FirstOrDefault(x => x.Item.ItemType == item.ItemType);
