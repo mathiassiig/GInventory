@@ -7,22 +7,26 @@ namespace GInventory
 {
     public class Inventory : MonoBehaviour
     {
-        private List<ItemInstance> _items;
-        public int _capacity;
+        public List<ItemInstance> Items { get; private set; }
+        public int Capacity;
 
-        public void Initialize(int capacity)
+        void Awake()
         {
-            _capacity = capacity;
-            _items = new List<ItemInstance>();
-            for (int i = 0; i < _capacity; i++)
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            Items = new List<ItemInstance>();
+            for (int i = 0; i < Capacity; i++)
             {
-                var itemInstance = new ItemInstance();
+                Items.Add(new ItemInstance());
             }
         }
 
         public bool Add(ItemInstance item)
         {
-            var existing = _items.Where(x => x != null).FirstOrDefault(x => x.ItemType == item.ItemType);
+            var existing = Items.Where(x => x != null).FirstOrDefault(x => x.ItemType.Value == item.ItemType.Value);
             if (existing != null)
             {
                 var overflow = existing.Add(item.Quantity.Value);
@@ -32,13 +36,14 @@ namespace GInventory
                     item.Quantity.Value = overflow;
             }
 
-            var empty = _items.FirstOrDefault(x => x.ItemType == null);
+            var empty = Items.FirstOrDefault(x => x.ItemType.Value == null);
             if (empty == null)
             {
                 return false;
             }
 
-            //empty.SetItem(item);
+            empty.ItemType.Value = item.ItemType.Value;
+            empty.Quantity.Value = item.Quantity.Value;
             return true;
         }
     }

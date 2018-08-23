@@ -8,11 +8,11 @@ namespace GInventory
     public class ItemInstance
     {
         public ReactiveProperty<int> Quantity = new ReactiveProperty<int>();
-        public ItemType ItemType;
+        public ReactiveProperty<ItemType> ItemType = new ReactiveProperty<ItemType>();
 
         public ItemInstance()
         {
-            ItemType = null;
+            ItemType.Value = null;
             Quantity.Value = 0;
         }
 
@@ -24,18 +24,18 @@ namespace GInventory
         
         public ItemInstance(ItemType type)
         {
-            ItemType = type;
+            ItemType.Value = type;
             Quantity.Value = 1;
         }
 
         public bool CanAddAll(int toAdd)
         {
-            if(ItemType.MaxQuantityInStack == 0)
+            if(ItemType.Value.MaxQuantityInStack == 0)
             {
                 return true;
             }
             var suggestedQuantity = Quantity.Value + toAdd;
-            if(suggestedQuantity > ItemType.MaxQuantityInStack)
+            if(suggestedQuantity > ItemType.Value.MaxQuantityInStack)
             {
                 return false;
             }
@@ -50,8 +50,8 @@ namespace GInventory
         public virtual int Add(int toAdd)
         {
             var suggestedQuantity = Quantity.Value + toAdd;
-            Quantity.Value = Mathf.Clamp(suggestedQuantity, 0, ItemType.MaxQuantityInStack == 0 ? int.MaxValue : ItemType.MaxQuantityInStack);
-            var overflow = Mathf.Clamp(suggestedQuantity - ItemType.MaxQuantityInStack, 0, int.MaxValue);
+            Quantity.Value = Mathf.Clamp(suggestedQuantity, 0, ItemType.Value.MaxQuantityInStack == 0 ? int.MaxValue : ItemType.Value.MaxQuantityInStack);
+            var overflow = Mathf.Clamp(suggestedQuantity - ItemType.Value.MaxQuantityInStack, 0, int.MaxValue);
             return overflow;
         }
 
@@ -67,6 +67,7 @@ namespace GInventory
             {
                 var underflow = quantityValue;
                 Quantity.Value = 0;
+                ItemType.Value = null;
                 return underflow;
             }
             Quantity.Value = quantityValue;

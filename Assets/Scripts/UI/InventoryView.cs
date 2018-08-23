@@ -9,30 +9,21 @@ namespace GInventory
     public class InventoryView : MonoBehaviour
     {
         [SerializeField] private RectTransform _itemsContent;
+        [SerializeField] private ItemInstanceView _itemViewPrefab;
 
-        private int _visualCapacity;
-        private List<ItemInstanceView> _itemInstanceViews;
+        private List<ItemInstanceView> _itemViews;
+        public Inventory Inventory { get; private set; }
 
-        public bool Add(ItemInstance item)
+        private void Awake()
         {
-            var existing = _itemInstanceViews.Where(x => x.Item != null).FirstOrDefault(x => x.Item.ItemType == item.ItemType);
-            if(existing != null)
-            {
-                var overflow = existing.Item.Add(item.Quantity.Value);
-                if (overflow == 0)
-                    return true;
-                else
-                    item.Quantity.Value = overflow;
-            }
+            Inventory = GetComponent<Inventory>(); // how do we connect inventory to view properly?
 
-            var empty = _itemInstanceViews.FirstOrDefault(x => x.IsEmpty);
-            if(empty == null)
+            _itemViews = new List<ItemInstanceView>();
+            for (int i = 0; i < Inventory.Capacity; i++)
             {
-                return false;
+                var instance = Instantiate(_itemViewPrefab, _itemsContent);
+                instance.SetItem(Inventory.Items[i]);
             }
-
-            empty.SetItem(item);
-            return true;
         }
 
     }

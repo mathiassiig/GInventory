@@ -17,11 +17,9 @@ namespace GInventory.Examples
             var ironIngot = new ItemInstance(Resources.Load<ItemType>("Items/IronIngot"));
             var ring = new ItemInstance(Resources.Load<ItemType>("Items/Ring"));
             var shield = new ItemInstance(Resources.Load<ItemType>("Items/Shield"));
-            //_inventoryA.Initialize(132);
-            //_inventoryB.Initialize(132);
 
-            _inventoryA.Add(apple);
-            _inventoryA.Add(apple);
+            _inventoryA.Inventory.Add(apple);
+            _inventoryA.Inventory.Add(apple);
         }
     }
 }

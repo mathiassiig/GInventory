@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UniRx;
+using System;
 
 namespace GInventory
 {
@@ -13,6 +14,8 @@ namespace GInventory
         [SerializeField] private Image _icon;
         [SerializeField] private ClickableObject _button;
         public CanvasGroup _canvasGroup; // todo: rename
+        private IDisposable _quantityDisposable;
+        private IDisposable _iconDisposable;
         public bool IsEmpty
         {
             get
@@ -37,37 +40,55 @@ namespace GInventory
             _quantityLabel.gameObject.SetActive(false);
         }
 
-
         public void SetItem(ItemInstance item)
         {
             Item = item;
-            if(item == null)
+            if (item.ItemType.Value == null)
             {
                 _icon.enabled = false;
                 _quantityLabel.gameObject.SetActive(false);
-                return;
             }
-            if(Item.ItemType.Icon != null)
+            TryDispose(_iconDisposable);
+            TryDispose(_quantityDisposable);
+            _iconDisposable = Item.ItemType.TakeWhile((x) => Item != null).TakeUntilDestroy(this).Subscribe(type =>
             {
-                _icon.enabled = true;
-                _icon.sprite = Item.ItemType.Icon;
-            }
-            else
-            {
-                _icon.enabled = false;
-            }
-            _quantityLabel.gameObject.SetActive(true);
-            Item.Quantity.TakeWhile((x) => Item != null).Subscribe(quantity =>
-            {
-                if(quantity == 0)
+                if (type == null)
                 {
-                    UnsetItem();
+                    _icon.enabled = false;
+                    _quantityLabel.gameObject.SetActive(false);
+                }
+                else if (Item.ItemType.Value.Icon != null)
+                {
+                    Debug.Log(type.Title);
+                    _icon.enabled = true;
+                    _icon.sprite = Item.ItemType.Value.Icon;
                 }
                 else
                 {
+                    _icon.enabled = false;
+                }
+            });
+            _quantityDisposable = Item.Quantity.TakeWhile((x) => Item != null).TakeUntilDestroy(this).Subscribe(quantity =>
+            {
+                if (quantity == 0)
+                {
+                    _quantityLabel.gameObject.SetActive(false);
+                    _icon.enabled = false;
+                }
+                else
+                {
+                    _quantityLabel.gameObject.SetActive(true);
                     _quantityLabel.text = quantity.ToString();
                 }
             });
+        }
+
+        private void TryDispose(IDisposable d)
+        {
+            if (d != null)
+            {
+                d.Dispose();
+            }
         }
 
         public void UnsetItem()
