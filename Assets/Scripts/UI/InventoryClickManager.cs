@@ -13,7 +13,6 @@ namespace GInventory
     {
         [SerializeField] private RectTransform _mainCanvas;
         [SerializeField] private LayerMask _droppableLayerMask;
-        [SerializeField] private GraphicRaycaster _graphicRaycaster;
         private ItemInstanceView _originalLiftedItem;
         private ItemInstanceView _clonedLiftedItem;
         private float _heightDrop = 0.25f;
@@ -27,6 +26,10 @@ namespace GInventory
             if (!_lifting && !item.IsEmpty)
             {
                 Lift(item);
+            }
+            else if (_lifting && item == _originalLiftedItem)
+            {
+                OnCancel();
             }
             else if (_lifting)
             {
@@ -53,6 +56,10 @@ namespace GInventory
             {
                 var overflow = to.Add(from.Quantity.Value);
                 from.Quantity.Value = overflow;
+                if (from.Quantity.Value == 0)
+                {
+                    from.Clear();
+                }
             }
             else // swap
             {
@@ -140,11 +147,23 @@ namespace GInventory
         {
             if (_clonedLiftedItem.Item.ItemType.Value.Prefab != null)
             {
-                var instance = Instantiate(_clonedLiftedItem.Item.ItemType.Value.Prefab, position, Quaternion.identity);
-                var itemInstanceComponent = instance.AddComponent<ItemInstanceComponent>();
+                var instantiateIndividuals = _clonedLiftedItem.Item.ItemType.Value.InstantiateIndividuals;
+                var count = instantiateIndividuals ? _clonedLiftedItem.Item.Quantity.Value : 1;
+                var prefab = _clonedLiftedItem.Item.ItemType.Value.Prefab;
+                // copy the item over
                 var itemInstanceTarget = new ItemInstance();
                 OnComplete(itemInstanceTarget);
-                itemInstanceComponent.Init(itemInstanceTarget);
+                for (int i = 0; i < count; i++)
+                {
+                    var instance = Instantiate(prefab, position + new Vector3(0, _heightDrop*i, 0), Quaternion.identity);
+                    var itemInstanceComponent = instance.AddComponent<ItemInstanceComponent>();
+                    var individualCopy = instantiateIndividuals? new ItemInstance(itemInstanceTarget) : itemInstanceTarget;
+                    if(instantiateIndividuals)
+                    {
+                        individualCopy.Quantity.Value = 1;
+                    }
+                    itemInstanceComponent.Init(individualCopy);
+                }
                 FinishLift();
             }
         }
@@ -170,7 +189,7 @@ namespace GInventory
                 }
                 else if (Input.GetMouseButtonDown(1))
                 {
-                    CancelLift();
+                    OnCancel();
                 }
             }
         }

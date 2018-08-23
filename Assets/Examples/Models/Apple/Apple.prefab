@@ -38,8 +38,6 @@ GameObject:
   - component: {fileID: 4911914808753078}
   - component: {fileID: 33027781391406242}
   - component: {fileID: 23367833736106142}
-  - component: {fileID: 54867703088304130}
-  - component: {fileID: 135501582195096704}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -56,6 +54,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4075061402504676}
   - component: {fileID: 95117441635074030}
+  - component: {fileID: 135536991094010438}
+  - component: {fileID: 54996127545843816}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Untagged
@@ -188,12 +188,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079520815101088}
   m_Mesh: {fileID: 4300002, guid: b242f4da205d6314997e80019234022c, type: 3}
---- !u!54 &54867703088304130
+--- !u!54 &54996127545843816
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1731388586497738}
+  m_GameObject: {fileID: 1785260726327006}
   serializedVersion: 2
   m_Mass: 0.1
   m_Drag: 0
@@ -221,15 +221,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!135 &135501582195096704
+--- !u!135 &135536991094010438
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1731388586497738}
+  m_GameObject: {fileID: 1785260726327006}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.0709637
-  m_Center: {x: 0, y: -0.0000004768373, z: -0.003007502}
+  m_Radius: 0.11
+  m_Center: {x: 0, y: 0, z: 0}

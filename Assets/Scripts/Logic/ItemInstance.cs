@@ -21,7 +21,7 @@ namespace GInventory
             ItemType.Value = i.ItemType.Value;
             Quantity.Value = i.Quantity.Value;
         }
-        
+
         public ItemInstance(ItemType type)
         {
             ItemType.Value = type;
@@ -30,12 +30,12 @@ namespace GInventory
 
         public bool CanAddAll(int toAdd)
         {
-            if(ItemType.Value.MaxQuantityInStack == 0)
+            if (ItemType.Value.MaxQuantityInStack == 0)
             {
                 return true;
             }
             var suggestedQuantity = Quantity.Value + toAdd;
-            if(suggestedQuantity > ItemType.Value.MaxQuantityInStack)
+            if (suggestedQuantity > ItemType.Value.MaxQuantityInStack)
             {
                 return false;
             }
@@ -66,12 +66,17 @@ namespace GInventory
             if (quantityValue < 0)
             {
                 var underflow = quantityValue;
-                Quantity.Value = 0;
-                ItemType.Value = null;
+                Clear();
                 return underflow;
             }
             Quantity.Value = quantityValue;
             return 0;
+        }
+
+        public void Clear()
+        {
+            Quantity.Value = 0;
+            ItemType.Value = null;
         }
     }
 }
