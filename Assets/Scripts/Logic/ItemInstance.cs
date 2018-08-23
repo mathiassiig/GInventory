@@ -18,7 +18,7 @@ namespace GInventory
 
         public ItemInstance(ItemInstance i)
         {
-            ItemType = i.ItemType;
+            ItemType.Value = i.ItemType.Value;
             Quantity.Value = i.Quantity.Value;
         }
         

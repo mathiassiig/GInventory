@@ -13,10 +13,6 @@ namespace GInventory.Examples
         void Start()
         {
             var apple = new ItemInstance(Resources.Load<ItemType>("Items/Apple"));
-            var cloak = new ItemInstance(Resources.Load<ItemType>("Items/Cloak"));
-            var ironIngot = new ItemInstance(Resources.Load<ItemType>("Items/IronIngot"));
-            var ring = new ItemInstance(Resources.Load<ItemType>("Items/Ring"));
-            var shield = new ItemInstance(Resources.Load<ItemType>("Items/Shield"));
 
             _inventoryA.Inventory.Add(apple);
             _inventoryA.Inventory.Add(apple);

@@ -20,7 +20,7 @@ namespace GInventory
         {
             get
             {
-                return Item == null;
+                return Item.ItemType.Value == null;
             }
         }
 
@@ -59,7 +59,6 @@ namespace GInventory
                 }
                 else if (Item.ItemType.Value.Icon != null)
                 {
-                    Debug.Log(type.Title);
                     _icon.enabled = true;
                     _icon.sprite = Item.ItemType.Value.Icon;
                 }
