@@ -348,6 +348,7 @@ MonoBehaviour:
   _itemsContent: {fileID: 463824928}
   _itemViewPrefab: {fileID: 114972453831365504, guid: b0bb8573b96d5694c8473ce15285912a,
     type: 2}
+  _inventory: {fileID: 463824933}
 --- !u!114 &463824933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +458,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCanvas: {fileID: 1387358209}
+  _droppableLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &910974491
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +546,7 @@ MonoBehaviour:
   _itemsContent: {fileID: 910974492}
   _itemViewPrefab: {fileID: 114972453831365504, guid: b0bb8573b96d5694c8473ce15285912a,
     type: 2}
+  _inventory: {fileID: 910974497}
 --- !u!114 &910974496
 MonoBehaviour:
   m_ObjectHideFlags: 0

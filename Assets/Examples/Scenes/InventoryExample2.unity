@@ -321,6 +321,7 @@ MonoBehaviour:
   _itemsContent: {fileID: 596107256}
   _itemViewPrefab: {fileID: 114972453831365504, guid: b0bb8573b96d5694c8473ce15285912a,
     type: 2}
+  _inventory: {fileID: 596107257}
 --- !u!114 &596107259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +420,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetInventory: {fileID: 596107257}
+  OnCannotInput:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GInventory.GameObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!65 &1090479264
 BoxCollider:
   m_ObjectHideFlags: 0
