@@ -10,14 +10,23 @@ namespace GInventory
     {
         [SerializeField] private RectTransform _itemsContent;
         [SerializeField] private ItemInstanceView _itemViewPrefab;
+        [SerializeField] private Inventory _inventory;
 
         private List<ItemInstanceView> _itemViews;
-        public Inventory Inventory { get; private set; }
-
-        private void Awake()
+        public Inventory Inventory 
         {
-            Inventory = GetComponent<Inventory>(); // how do we connect inventory to view properly?
+            get
+            {
+                return _inventory;
+            }
+            private set
+            {
+                _inventory = value;
+            }
+        }
 
+        private void Start()
+        {
             _itemViews = new List<ItemInstanceView>();
             for (int i = 0; i < Inventory.Capacity; i++)
             {

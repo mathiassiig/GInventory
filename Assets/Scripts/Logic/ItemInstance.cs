@@ -63,7 +63,7 @@ namespace GInventory
         public virtual int Remove(int toRemove)
         {
             var quantityValue = Quantity.Value - toRemove;
-            if (quantityValue < 0)
+            if (quantityValue <= 0)
             {
                 var underflow = quantityValue;
                 Clear();
