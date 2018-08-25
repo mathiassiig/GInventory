@@ -19,6 +19,7 @@ namespace GInventory
         private bool _lifting;
         private bool _hoveringUI = false;
         private Action OnCancel;
+        private Action<ItemInstanceView> OnTryLiftEnd;
         private Action<ItemInstance> OnComplete;
 
         public void HandleClick(ItemInstanceView item)
@@ -33,8 +34,7 @@ namespace GInventory
             }
             else if (_lifting)
             {
-                OnComplete(item.Item);
-                FinishLift();
+                OnTryLiftEnd(item);
             }
         }
 
@@ -50,7 +50,7 @@ namespace GInventory
             }
         }
 
-        private void Move(ItemInstance from, ItemInstance to)
+        private bool Move(ItemInstance from, ItemInstance to)
         {
             if (from != null && to != null && from.ItemType.Value == to.ItemType.Value)
             {
@@ -60,15 +60,19 @@ namespace GInventory
                 {
                     from.Clear();
                 }
+                return true;
             }
-            else // swap
+            else
             {
-                var fromCopy = new ItemInstance(from);
+                var fromType = from.ItemType.Value;
+                var fromQuantity = from.Quantity.Value;
+
                 from.Quantity.Value = to.Quantity.Value;
                 from.ItemType.Value = to.ItemType.Value;
 
-                to.Quantity.Value = fromCopy.Quantity.Value;
-                to.ItemType.Value = fromCopy.ItemType.Value;
+                to.Quantity.Value = fromQuantity;
+                to.ItemType.Value = fromType;
+                return true;
             }
         }
 
@@ -93,16 +97,40 @@ namespace GInventory
                     original.Item.Quantity.Value = amountToLift + amountLeft;
                     CancelLift();
                 };
-                OnComplete = (target) =>
+                OnTryLiftEnd = (target) =>
                 {
-                    target.ItemType.Value = _originalLiftedItem.Item.ItemType.Value;
-                    target.Quantity.Value = amountToLift;
+                    var copy = new ItemInstance(_originalLiftedItem.Item.ItemType.Value, amountToLift);
+                    bool success = target.Item.Set(copy);
+                    if (success)
+                    {
+                        FinishLift();
+                    }
+                    else
+                    {
+                        OnCancel();
+                    }
                 };
             }
             else
             {
                 OnCancel = CancelLift;
-                OnComplete = (target) => Move(_originalLiftedItem.Item, target);
+                OnTryLiftEnd = (target) =>
+                {
+                    bool canMove = target.CanMove(_originalLiftedItem.Item);
+                    if (canMove)
+                    {
+                        OnComplete(target.Item);
+                    }
+                    else
+                    {
+                        OnCancel();
+                    }
+                };
+                OnComplete = (target) =>
+                {
+                    Move(_originalLiftedItem.Item, target);
+                    FinishLift();
+                };
             }
             original._canvasGroup.alpha = 0.33f;
             _clonedLiftedItem.transform.SetParent(_mainCanvas);
@@ -155,10 +183,10 @@ namespace GInventory
                 OnComplete(itemInstanceTarget);
                 for (int i = 0; i < count; i++)
                 {
-                    var instance = Instantiate(prefab, position + new Vector3(0, _heightDrop*i, 0), Quaternion.identity);
+                    var instance = Instantiate(prefab, position + new Vector3(0, _heightDrop * i, 0), Quaternion.identity);
                     var itemInstanceComponent = instance.AddComponent<ItemInstanceComponent>();
-                    var individualCopy = instantiateIndividuals? new ItemInstance(itemInstanceTarget) : itemInstanceTarget;
-                    if(instantiateIndividuals)
+                    var individualCopy = instantiateIndividuals ? new ItemInstance(itemInstanceTarget) : itemInstanceTarget;
+                    if (instantiateIndividuals)
                     {
                         individualCopy.Quantity.Value = 1;
                     }

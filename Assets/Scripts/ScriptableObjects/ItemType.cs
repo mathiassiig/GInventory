@@ -13,5 +13,10 @@ namespace GInventory
         public GameObject Prefab; // if the game allows spawning of items, which gameobject should be created from this type
         public int MaxQuantityInStack; // 0 for unlimited
         public bool InstantiateIndividuals; // if true, it will instantiate 1 prefab instance per quantity
+
+        public virtual bool CanMove(ItemInstance i)
+        {
+            return true;
+        }
     }
 }

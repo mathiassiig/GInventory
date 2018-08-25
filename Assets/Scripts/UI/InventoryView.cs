@@ -31,6 +31,7 @@ namespace GInventory
             for (int i = 0; i < Inventory.Capacity; i++)
             {
                 var instance = Instantiate(_itemViewPrefab, _itemsContent);
+                var item = Inventory.Items[i];
                 instance.SetItem(Inventory.Items[i]);
             }
         }

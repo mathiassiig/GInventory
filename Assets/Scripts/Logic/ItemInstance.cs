@@ -5,6 +5,7 @@ using UniRx;
 
 namespace GInventory
 {
+    [System.Serializable]
     public class ItemInstance
     {
         public ReactiveProperty<int> Quantity = new ReactiveProperty<int>();
@@ -12,8 +13,7 @@ namespace GInventory
 
         public ItemInstance()
         {
-            ItemType.Value = null;
-            Quantity.Value = 0;
+            Clear();
         }
 
         public ItemInstance(ItemInstance i)
@@ -26,6 +26,25 @@ namespace GInventory
         {
             ItemType.Value = type;
             Quantity.Value = 1;
+        }
+
+        public ItemInstance(ItemType type, int quantity)
+        {
+            ItemType.Value = type;
+            Quantity.Value = quantity;
+        }
+
+        public virtual void Set(ItemType item, int quantity)
+        {
+            Quantity.Value = quantity;
+            ItemType.Value = item;
+        }
+
+        public virtual bool Set(ItemInstance item)
+        {
+            Quantity.Value = item.Quantity.Value;
+            ItemType.Value = item.ItemType.Value;
+            return true;
         }
 
         public bool CanAddAll(int toAdd)
