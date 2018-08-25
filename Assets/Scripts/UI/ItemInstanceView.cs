@@ -141,7 +141,8 @@ namespace GInventory
 
         public void UnsetItem()
         {
-            Item = null;
+            Item.ItemType.Value = null;
+            Item.Quantity.Value = 0;
             _icon.sprite = null;
             _icon.enabled = false;
             _quantityLabel.text = "";

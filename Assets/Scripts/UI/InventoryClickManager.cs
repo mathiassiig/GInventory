@@ -76,6 +76,66 @@ namespace GInventory
             }
         }
 
+        private void Lift(int amount)
+        {
+            var amountLeft = _originalLiftedItem.Item.Quantity.Value - amount;
+            _originalLiftedItem.Item.Quantity.Value = amountLeft;
+            _clonedLiftedItem.Item.Quantity.Value = amount;
+            OnCancel = () =>
+            {
+                _originalLiftedItem.Item.Quantity.Value = amount + amountLeft;
+                CancelLift();
+            };
+            Action<ItemInstance> move = (target) =>
+            {
+                var copy = new ItemInstance(_originalLiftedItem.Item.ItemType.Value, amount);
+                bool success = target.Set(copy);
+                if (success)
+                {
+                    FinishLift();
+                }
+                else
+                {
+                    OnCancel();
+                }
+            };
+            OnTryLiftEnd = (targetView) =>
+            {
+                move(targetView.Item);
+            };
+            OnComplete = (item) =>
+            {
+                move(item);
+            };
+        }
+
+        private void LiftAll()
+        {
+            _originalLiftedItem.UnsetItem();
+            OnCancel = () =>
+            {
+                _originalLiftedItem.Item.Quantity.Value = _originalLiftedItem.Item.Quantity.Value + _clonedLiftedItem.Item.Quantity.Value;
+                CancelLift();
+            };
+            OnTryLiftEnd = (target) =>
+            {
+                bool canMove = target.CanMove(_originalLiftedItem.Item);
+                if (canMove)
+                {
+                    OnComplete(target.Item);
+                }
+                else
+                {
+                    OnCancel();
+                }
+            };
+            OnComplete = (target) =>
+            {
+                Move(_clonedLiftedItem.Item, target);
+                FinishLift();
+            };
+        }
+
 
 
         public void Lift(ItemInstanceView original, bool half = false)
@@ -88,62 +148,11 @@ namespace GInventory
             _clonedLiftedItem.GetComponent<RectTransform>().sizeDelta = new Vector2(64, 64); // todo; hacky
             if (half && _originalLiftedItem.Item.Quantity.Value > 1)
             {
-                var amountToLift = original.Item.Quantity.Value / 2;
-                var amountLeft = original.Item.Quantity.Value - amountToLift;
-                original.Item.Quantity.Value = amountLeft;
-                _clonedLiftedItem.Item.Quantity.Value = amountToLift;
-                OnCancel = () =>
-                {
-                    original.Item.Quantity.Value = amountToLift + amountLeft;
-                    CancelLift();
-                };
-                OnTryLiftEnd = (target) =>
-                {
-                    var copy = new ItemInstance(_originalLiftedItem.Item.ItemType.Value, amountToLift);
-                    bool success = target.Item.Set(copy);
-                    if (success)
-                    {
-                        FinishLift();
-                    }
-                    else
-                    {
-                        OnCancel();
-                    }
-                };
-                OnComplete = (target) =>
-                {
-                    var copy = new ItemInstance(_originalLiftedItem.Item.ItemType.Value, amountToLift);
-                    bool success = target.Set(copy);
-                    if (success)
-                    {
-                        FinishLift();
-                    }
-                    else
-                    {
-                        OnCancel();
-                    }
-                };
+                Lift(original.Item.Quantity.Value / 2);
             }
             else
             {
-                OnCancel = CancelLift;
-                OnTryLiftEnd = (target) =>
-                {
-                    bool canMove = target.CanMove(_originalLiftedItem.Item);
-                    if (canMove)
-                    {
-                        OnComplete(target.Item);
-                    }
-                    else
-                    {
-                        OnCancel();
-                    }
-                };
-                OnComplete = (target) =>
-                {
-                    Move(_originalLiftedItem.Item, target);
-                    FinishLift();
-                };
+                LiftAll();
             }
             original._canvasGroup.alpha = 0.33f;
             _clonedLiftedItem.transform.SetParent(_mainCanvas);
