@@ -14,7 +14,7 @@ namespace GInventory
         [SerializeField] private RectTransform _mainCanvas;
         [SerializeField] private LayerMask _droppableLayerMask;
         [Header("Input")]
-        [SerializeField] private KeyCode _singleModifier;
+        [SerializeField] private KeyCode _singleModifier = KeyCode.LeftShift;
 
 
         private ItemInstanceView _originalLiftedItem;
