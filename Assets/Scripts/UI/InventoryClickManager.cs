@@ -110,6 +110,19 @@ namespace GInventory
                         OnCancel();
                     }
                 };
+                OnComplete = (target) =>
+                {
+                    var copy = new ItemInstance(_originalLiftedItem.Item.ItemType.Value, amountToLift);
+                    bool success = target.Set(copy);
+                    if (success)
+                    {
+                        FinishLift();
+                    }
+                    else
+                    {
+                        OnCancel();
+                    }
+                };
             }
             else
             {
@@ -192,7 +205,6 @@ namespace GInventory
                     }
                     itemInstanceComponent.Init(individualCopy);
                 }
-                FinishLift();
             }
         }
 
