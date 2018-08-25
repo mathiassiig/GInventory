@@ -13,18 +13,27 @@ namespace GInventory
     {
         [SerializeField] private RectTransform _mainCanvas;
         [SerializeField] private LayerMask _droppableLayerMask;
+        [Header("Input")]
+        [SerializeField] private KeyCode _singleModifier;
+
+
         private ItemInstanceView _originalLiftedItem;
         private ItemInstanceView _clonedLiftedItem;
         private float _heightDrop = 0.25f;
         private bool _lifting;
         private bool _hoveringUI = false;
+        private bool _singleMode = false;
         private Action OnCancel;
         private Action<ItemInstanceView> OnTryLiftEnd;
         private Action<ItemInstance> OnComplete;
 
         public void HandleClick(ItemInstanceView item)
         {
-            if (!_lifting && !item.IsEmpty)
+            if(_singleMode && _lifting)
+            {
+                return;
+            }
+            else if (!_lifting && !item.IsEmpty)
             {
                 Lift(item);
             }
@@ -48,6 +57,12 @@ namespace GInventory
             {
                 OnCancel();
             }
+        }
+
+        private void AddSingle()
+        {
+            var removed = _originalLiftedItem.Item.Remove(1);
+            _clonedLiftedItem.Item.Add(removed == 0 ? 1 : 0);
         }
 
         private bool Move(ItemInstance from, ItemInstance to)
@@ -79,24 +94,36 @@ namespace GInventory
         private void Lift(int amount)
         {
             var amountLeft = _originalLiftedItem.Item.Quantity.Value - amount;
-            _originalLiftedItem.Item.Quantity.Value = amountLeft;
-            _clonedLiftedItem.Item.Quantity.Value = amount;
+            _originalLiftedItem.Item.Set(amountLeft);
+            _clonedLiftedItem.Item.Set(amount);
             OnCancel = () =>
             {
-                _originalLiftedItem.Item.Quantity.Value = amount + amountLeft;
+                _originalLiftedItem.Item.ItemType.Value = _clonedLiftedItem.Item.ItemType.Value;
+                _originalLiftedItem.Item.Quantity.Value = _originalLiftedItem.Item.Quantity.Value + _clonedLiftedItem.Item.Quantity.Value;
                 CancelLift();
             };
             Action<ItemInstance> move = (target) =>
             {
-                var copy = new ItemInstance(_originalLiftedItem.Item.ItemType.Value, amount);
-                bool success = target.Set(copy);
-                if (success)
+                if (target.ItemType.Value == _clonedLiftedItem.Item.ItemType.Value)
                 {
+                    var overflow = target.Add(_clonedLiftedItem.Item.Quantity.Value);
+                    if (overflow > 0)
+                    {
+                        _originalLiftedItem.SetItem(new ItemInstance(_clonedLiftedItem.Item.ItemType.Value, overflow));
+                    }
                     FinishLift();
                 }
                 else
                 {
-                    OnCancel();
+                    bool success = target.Set(_clonedLiftedItem.Item);
+                    if (success)
+                    {
+                        FinishLift();
+                    }
+                    else
+                    {
+                        OnCancel();
+                    }
                 }
             };
             OnTryLiftEnd = (targetView) =>
@@ -109,35 +136,6 @@ namespace GInventory
             };
         }
 
-        private void LiftAll()
-        {
-            _originalLiftedItem.UnsetItem();
-            OnCancel = () =>
-            {
-                _originalLiftedItem.Item.Quantity.Value = _originalLiftedItem.Item.Quantity.Value + _clonedLiftedItem.Item.Quantity.Value;
-                CancelLift();
-            };
-            OnTryLiftEnd = (target) =>
-            {
-                bool canMove = target.CanMove(_originalLiftedItem.Item);
-                if (canMove)
-                {
-                    OnComplete(target.Item);
-                }
-                else
-                {
-                    OnCancel();
-                }
-            };
-            OnComplete = (target) =>
-            {
-                Move(_clonedLiftedItem.Item, target);
-                FinishLift();
-            };
-        }
-
-
-
         public void Lift(ItemInstanceView original, bool half = false)
         {
             _originalLiftedItem = original;
@@ -146,14 +144,17 @@ namespace GInventory
             _clonedLiftedItem._canvasGroup.interactable = false;
             _clonedLiftedItem.SetItem(new ItemInstance(_originalLiftedItem.Item));
             _clonedLiftedItem.GetComponent<RectTransform>().sizeDelta = new Vector2(64, 64); // todo; hacky
-            if (half && _originalLiftedItem.Item.Quantity.Value > 1)
+
+            int amount = _originalLiftedItem.Item.Quantity.Value;
+            if (_singleMode)
             {
-                Lift(original.Item.Quantity.Value / 2);
+                amount = 1;
             }
-            else
+            else if (half)
             {
-                LiftAll();
+                amount = _originalLiftedItem.Item.Quantity.Value / 2;
             }
+            Lift(amount);
             original._canvasGroup.alpha = 0.33f;
             _clonedLiftedItem.transform.SetParent(_mainCanvas);
             _clonedLiftedItem.transform.localScale = Vector3.one;
@@ -232,14 +233,30 @@ namespace GInventory
         {
             if (_lifting)
             {
-                if (Input.GetMouseButtonDown(0) && !_hoveringUI)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    TryDrop();
+                    if (_singleMode)
+                    {
+                        AddSingle();
+                    }
+                    else if (!_hoveringUI)
+                    {
+                        TryDrop();
+                    }
                 }
                 else if (Input.GetMouseButtonDown(1))
                 {
                     OnCancel();
                 }
+            }
+
+            if (Input.GetKeyDown(_singleModifier))
+            {
+                _singleMode = true;
+            }
+            else if (Input.GetKeyUp(_singleModifier))
+            {
+                _singleMode = false;
             }
         }
 

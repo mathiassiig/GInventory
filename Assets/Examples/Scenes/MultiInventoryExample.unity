@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea139d16aa76ae4996f4d5f08c09eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Items: []
   Capacity: 64
 --- !u!114 &463824934
 MonoBehaviour:
@@ -462,7 +463,8 @@ MonoBehaviour:
   _mainCanvas: {fileID: 1387358209}
   _droppableLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
+  _singleModifier: 304
 --- !u!1 &910974491
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea139d16aa76ae4996f4d5f08c09eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Items: []
   Capacity: 64
 --- !u!1 &1268297913
 GameObject:

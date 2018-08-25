@@ -40,6 +40,15 @@ namespace GInventory
             ItemType.Value = item;
         }
 
+        public void Set(int quantity)
+        {
+            Quantity.Value = quantity;
+            if(Quantity.Value == 0)
+            {
+                Clear();
+            }
+        }
+
         public virtual bool Set(ItemInstance item)
         {
             Quantity.Value = item.Quantity.Value;
