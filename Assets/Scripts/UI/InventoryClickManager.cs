@@ -20,6 +20,7 @@ namespace GInventory
         private ItemInstanceView _originalLiftedItem;
         private ItemInstanceView _clonedLiftedItem;
         private float _heightDrop = 0.25f;
+        private int FRAME_COUNT = 0;
         private bool _lifting;
         private bool _hoveringUI = false;
         private bool _singleMode = false;
@@ -29,7 +30,7 @@ namespace GInventory
 
         public void HandleClick(ItemInstanceView item)
         {
-            if(_singleMode && _lifting)
+            if (_singleMode && _lifting)
             {
                 return;
             }
@@ -49,6 +50,7 @@ namespace GInventory
 
         public void HandleRightClick(ItemInstanceView item)
         {
+            Debug.Log(FRAME_COUNT);
             if (!_lifting && !item.IsEmpty)
             {
                 Lift(item, true);
@@ -231,6 +233,7 @@ namespace GInventory
 
         void Update()
         {
+            FRAME_COUNT++;
             if (_lifting)
             {
                 if (Input.GetMouseButtonDown(0))
@@ -244,7 +247,7 @@ namespace GInventory
                         TryDrop();
                     }
                 }
-                else if (Input.GetMouseButtonDown(1))
+                else if (Input.GetMouseButtonUp(1))
                 {
                     OnCancel();
                 }

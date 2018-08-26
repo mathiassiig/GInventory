@@ -756,6 +756,7 @@ MonoBehaviour:
   _droppableLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  _singleModifier: 304
 --- !u!114 &1861456677
 MonoBehaviour:
   m_ObjectHideFlags: 0
