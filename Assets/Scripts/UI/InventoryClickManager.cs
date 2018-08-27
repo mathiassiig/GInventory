@@ -67,32 +67,6 @@ namespace GInventory
             _clonedLiftedItem.Item.Add(removed == 0 ? 1 : 0);
         }
 
-        private bool Move(ItemInstance from, ItemInstance to)
-        {
-            if (from != null && to != null && from.ItemType.Value == to.ItemType.Value)
-            {
-                var overflow = to.Add(from.Quantity.Value);
-                from.Quantity.Value = overflow;
-                if (from.Quantity.Value == 0)
-                {
-                    from.Clear();
-                }
-                return true;
-            }
-            else
-            {
-                var fromType = from.ItemType.Value;
-                var fromQuantity = from.Quantity.Value;
-
-                from.Quantity.Value = to.Quantity.Value;
-                from.ItemType.Value = to.ItemType.Value;
-
-                to.Quantity.Value = fromQuantity;
-                to.ItemType.Value = fromType;
-                return true;
-            }
-        }
-
         private void Lift(int amount)
         {
             var amountLeft = _originalLiftedItem.Item.Quantity.Value - amount;
@@ -130,7 +104,15 @@ namespace GInventory
             };
             OnTryLiftEnd = (targetView) =>
             {
-                move(targetView.Item);
+                var canMove = targetView.CanMove(_clonedLiftedItem.Item);
+                if(canMove)
+                {
+                    move(targetView.Item);
+                }
+                else
+                {
+                    OnCancel();
+                }
             };
             OnComplete = (item) =>
             {
