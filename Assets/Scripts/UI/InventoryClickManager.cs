@@ -15,12 +15,12 @@ namespace GInventory
         [SerializeField] private LayerMask _droppableLayerMask;
         [Header("Input")]
         [SerializeField] private KeyCode _singleModifier = KeyCode.LeftShift;
+        [SerializeField] private KeyCode _cancel = KeyCode.Escape;
 
 
         private ItemInstanceView _originalLiftedItem;
         private ItemInstanceView _clonedLiftedItem;
         private float _heightDrop = 0.25f;
-        private int FRAME_COUNT = 0;
         private bool _lifting;
         private bool _hoveringUI = false;
         private bool _singleMode = false;
@@ -50,7 +50,6 @@ namespace GInventory
 
         public void HandleRightClick(ItemInstanceView item)
         {
-            Debug.Log(FRAME_COUNT);
             if (!_lifting && !item.IsEmpty)
             {
                 Lift(item, true);
@@ -136,7 +135,7 @@ namespace GInventory
             }
             else if (half)
             {
-                amount = _originalLiftedItem.Item.Quantity.Value / 2;
+                amount = Mathf.Max(1, _originalLiftedItem.Item.Quantity.Value / 2);
             }
             Lift(amount);
             original._canvasGroup.alpha = 0.33f;
@@ -215,7 +214,6 @@ namespace GInventory
 
         void Update()
         {
-            FRAME_COUNT++;
             if (_lifting)
             {
                 if (Input.GetMouseButtonDown(0))
@@ -229,7 +227,7 @@ namespace GInventory
                         TryDrop();
                     }
                 }
-                else if (Input.GetMouseButtonUp(1))
+                else if (Input.GetKeyDown(_cancel))
                 {
                     OnCancel();
                 }

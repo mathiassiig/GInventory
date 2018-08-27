@@ -33,6 +33,7 @@ namespace GInventory
     {
         public EquippableSlotType Slot;
         public List<EquippableInstanceModel> Models;
+        
         public override bool CanMove(ItemInstance itemInstance)
         {
             var asEquippable = itemInstance.ItemType.Value as EquippableType;

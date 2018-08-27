@@ -370,6 +370,8 @@ MonoBehaviour:
   Instantiations:
   - ItemType: {fileID: 11400000, guid: 8ad472cb68803429fa81cde5e9cc261f, type: 2}
     Quantity: 1
+  - ItemType: {fileID: 11400000, guid: e17027cf7cdc6804293706e65a59b7e9, type: 2}
+    Quantity: 5
   TargetInventory: {fileID: 122736644}
 --- !u!1001 &304408587
 Prefab:
@@ -1115,6 +1117,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   _singleModifier: 304
+  _cancel: 27
 --- !u!1 &1851499933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,13 +1192,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1851499933}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.034899585, z: 0, w: 0.99939084}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -4, z: 0}
 --- !u!1001 &1972832757
 Prefab:
   m_ObjectHideFlags: 0
