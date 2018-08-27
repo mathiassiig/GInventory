@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7c6bb858f1a942ecb44e5e2b7a17d96, type: 3}
-  m_Name: Helmet
+  m_Name: Bronze_Helmet
   m_EditorClassIdentifier: 
-  Title: Helmet
+  Title: Bronze helmet
   Description: A helmet
   Icon: {fileID: 21300000, guid: b3760364d64be4bac8263edbf59491da, type: 3}
   Prefab: {fileID: 1541729904862480, guid: 33d809739ca0b4d98a19a41594b7c48e, type: 2}
@@ -21,6 +21,6 @@ MonoBehaviour:
   Models:
   - Prefab: {fileID: 1541729904862480, guid: 33d809739ca0b4d98a19a41594b7c48e, type: 2}
     Target: 0
-    LocalPosition: {x: 0, y: 1, z: 0}
+    LocalPosition: {x: 0, y: 1, z: -0.1}
     LocalRotation: {x: -90, y: 0, z: -180}
-    LocalScale: {x: 106.3, y: 106.3, z: 106.3}
+    LocalScale: {x: 1, y: 1, z: 1}

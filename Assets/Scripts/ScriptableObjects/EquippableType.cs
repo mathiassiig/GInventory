@@ -14,7 +14,11 @@ namespace GInventory
 
     public enum BodyTarget
     {
-        Head
+        Head,
+        LegUpperRight,
+        LegUpperLeft,
+        LegLowerRight,
+        LegLowerLeft
     }
 
     [System.Serializable]

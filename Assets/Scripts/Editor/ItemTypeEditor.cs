@@ -30,7 +30,7 @@ namespace GInventory
                 if (defaultCustomIcon != null)
                 {
                     EditorUtility.CopySerialized(defaultCustomIcon, newIcon);
-					var sprite = Sprite.Create(newIcon, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f));
+                    var sprite = Sprite.Create(newIcon, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f));
                     _target.Icon = sprite;
 
                     AssetDatabase.AddObjectToAsset(sprite, _target);

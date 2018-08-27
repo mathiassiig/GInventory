@@ -31,9 +31,9 @@ namespace GInventory
 			{
                 Unset(list);
             }
+            var slotInstances = new List<GameObject>();
             foreach (var model in item.Models)
             {
-                var slotInstances = new List<GameObject>();
                 _bodyInstances[item.Slot] = slotInstances;
                 AddModel(model, slotInstances);
             }

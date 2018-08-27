@@ -372,7 +372,13 @@ MonoBehaviour:
     Quantity: 1
   - ItemType: {fileID: 11400000, guid: e17027cf7cdc6804293706e65a59b7e9, type: 2}
     Quantity: 5
+  - ItemType: {fileID: 11400000, guid: 7a0084ef4505146f285abc2a6302c9c3, type: 2}
+    Quantity: 1
   TargetInventory: {fileID: 122736644}
+--- !u!4 &225249306 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400048, guid: 9c6414e769edd4c4888f2814abb3bb32, type: 3}
+  m_PrefabInternal: {fileID: 881607781}
 --- !u!1001 &304408587
 Prefab:
   m_ObjectHideFlags: 0
@@ -719,6 +725,14 @@ MonoBehaviour:
   BodyDictionary:
   - BodyName: 0
     TransformTarget: {fileID: 881607782}
+  - BodyName: 1
+    TransformTarget: {fileID: 225249306}
+  - BodyName: 2
+    TransformTarget: {fileID: 1006294895}
+  - BodyName: 3
+    TransformTarget: {fileID: 1390261428}
+  - BodyName: 4
+    TransformTarget: {fileID: 1972833329}
 --- !u!1 &1004499279
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +842,10 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!4 &1006294895 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400028, guid: 9c6414e769edd4c4888f2814abb3bb32, type: 3}
+  m_PrefabInternal: {fileID: 881607781}
 --- !u!1001 &1103290943
 Prefab:
   m_ObjectHideFlags: 0
@@ -1005,6 +1023,10 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224706927580605288, guid: d2e7c368a571c4a668f57f20400c8e6b,
     type: 2}
   m_PrefabInternal: {fileID: 1103290943}
+--- !u!4 &1390261428 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400040, guid: 9c6414e769edd4c4888f2814abb3bb32, type: 3}
+  m_PrefabInternal: {fileID: 881607781}
 --- !u!1 &1680783407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,6 +1340,10 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224706927580605288, guid: d2e7c368a571c4a668f57f20400c8e6b,
     type: 2}
   m_PrefabInternal: {fileID: 1972832757}
+--- !u!4 &1972833329 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400020, guid: 9c6414e769edd4c4888f2814abb3bb32, type: 3}
+  m_PrefabInternal: {fileID: 881607781}
 --- !u!1 &1980469028
 GameObject:
   m_ObjectHideFlags: 0

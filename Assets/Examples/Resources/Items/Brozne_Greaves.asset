@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c6bb858f1a942ecb44e5e2b7a17d96, type: 3}
+  m_Name: Brozne_Greaves
+  m_EditorClassIdentifier: 
+  Title: Bronze Greaves
+  Description: Bronzos!
+  Icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  Prefab: {fileID: 0}
+  MaxQuantityInStack: 1
+  InstantiateIndividuals: 0
+  Slot: 2
+  Models:
+  - Prefab: {fileID: 1914553850319280, guid: 7a872cf5032164706a3c3992b1074afb, type: 2}
+    Target: 1
+    LocalPosition: {x: -0.06, y: 1.3, z: 0.05}
+    LocalRotation: {x: 90, y: 0, z: 0}
+    LocalScale: {x: 1.05, y: 1.05, z: 1.05}
+  - Prefab: {fileID: 1914553850319280, guid: 7a872cf5032164706a3c3992b1074afb, type: 2}
+    Target: 2
+    LocalPosition: {x: 0.06, y: 1.3, z: 0.05}
+    LocalRotation: {x: 90, y: 0, z: 0}
+    LocalScale: {x: 1.05, y: 1.05, z: 1.05}
+  - Prefab: {fileID: 1514669799227786, guid: f0e774b4efdd646e79c336714b09e0a3, type: 2}
+    Target: 3
+    LocalPosition: {x: 0, y: 1, z: 0}
+    LocalRotation: {x: 90, y: 0, z: 0}
+    LocalScale: {x: 1, y: 1, z: 1}
+  - Prefab: {fileID: 1514669799227786, guid: f0e774b4efdd646e79c336714b09e0a3, type: 2}
+    Target: 4
+    LocalPosition: {x: 0, y: 1, z: 0}
+    LocalRotation: {x: 90, y: 0, z: 0}
+    LocalScale: {x: 1, y: 1, z: 1}
