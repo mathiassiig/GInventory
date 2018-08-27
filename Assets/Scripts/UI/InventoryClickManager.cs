@@ -90,9 +90,11 @@ namespace GInventory
                 }
                 else
                 {
+                    var targetBefore = new ItemInstance(target);
                     bool success = target.Set(_clonedLiftedItem.Item);
                     if (success)
                     {
+                        _originalLiftedItem.Item.Set(targetBefore);
                         FinishLift();
                     }
                     else
