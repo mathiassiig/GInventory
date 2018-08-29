@@ -36,7 +36,9 @@ namespace GInventory
     public class EquippableType : ItemType
     {
         public EquippableSlotType Slot;
-        public List<EquippableInstanceModel> Models;
+        public List<EquippableInstanceModel> StaticModels;
+        public bool Rigged;
+        public GameObject RiggedModel;
         
         public override bool CanMove(ItemInstance itemInstance)
         {

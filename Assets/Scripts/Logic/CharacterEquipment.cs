@@ -15,6 +15,7 @@ namespace GInventory
     {
         public List<BodyTransformPair> BodyDictionary;
         private Dictionary<EquippableSlotType, List<GameObject>> _bodyInstances = new Dictionary<EquippableSlotType, List<GameObject>>();
+        [SerializeField] private SkinnedMeshRenderer _meshRenderer;
 
         public void Unset(EquippableSlotType slot)
         {
@@ -32,11 +33,26 @@ namespace GInventory
                 Unset(list);
             }
             var slotInstances = new List<GameObject>();
-            foreach (var model in item.Models)
+            _bodyInstances[item.Slot] = slotInstances;
+            if (item.Rigged)
             {
-                _bodyInstances[item.Slot] = slotInstances;
-                AddModel(model, slotInstances);
+                AddModel(item.RiggedModel, slotInstances);
             }
+            else
+            {
+                foreach (var model in item.StaticModels)
+                {
+                    AddModel(model, slotInstances);
+                }
+            }
+        }
+
+        private void AddModel(GameObject riggedModel, List<GameObject> list)
+        {
+            var modelInstance = Instantiate(riggedModel, transform);
+            var skeletonCopier = modelInstance.GetComponentInChildren<CopySkeleton>();
+            skeletonCopier.Character = _meshRenderer;
+            list.Add(modelInstance);
         }
 
         private void AddModel(EquippableInstanceModel model, List<GameObject> list)
