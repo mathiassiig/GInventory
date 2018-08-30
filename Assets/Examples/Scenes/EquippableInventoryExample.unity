@@ -377,6 +377,8 @@ MonoBehaviour:
     Quantity: 1
   - ItemType: {fileID: 11400000, guid: ca1508caa940c2341ab90d79640d5578, type: 2}
     Quantity: 1
+  - ItemType: {fileID: 11400000, guid: 33c14e7206a61d24397647ac8794b599, type: 2}
+    Quantity: 1
   TargetInventory: {fileID: 122736644}
 --- !u!4 &225249306 stripped
 Transform:

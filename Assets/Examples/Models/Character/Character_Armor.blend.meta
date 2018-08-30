@@ -36,6 +36,7 @@ ModelImporter:
     100060: Arm
     100062: Character
     100064: Helmet
+    100066: Leg
     400000: Armature
     400002: //RootNode
     400004: Chest
@@ -69,6 +70,7 @@ ModelImporter:
     400060: Arm
     400062: Character
     400064: Helmet
+    400066: Leg
     2100000: unnamed
     2100002: Bronze
     4300000: Chest
@@ -77,6 +79,7 @@ ModelImporter:
     4300006: Arm
     4300008: Helmet
     4300010: Character
+    4300012: Leg
     7400000: Default Take
     7400002: Armature_mixamo_com_Layer0
     9500000: //RootNode
@@ -86,6 +89,7 @@ ModelImporter:
     13700006: Arm
     13700008: Character
     13700010: Helmet
+    13700012: Leg
   externalObjects: {}
   materials:
     importMaterials: 1
