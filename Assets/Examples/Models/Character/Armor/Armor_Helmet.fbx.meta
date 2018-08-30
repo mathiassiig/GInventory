@@ -1,79 +1,79 @@
 fileFormatVersion: 2
-guid: f8ffaa29c5e643146b80037eed7674fa
+guid: 3897f009790b5f14caab3c2da1a611da
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: Armature
     100002: //RootNode
-    100004: Chest
-    100006: Cube_003
-    100008: mixamorig_Head
-    100010: mixamorig_HeadTop_End
-    100012: mixamorig_Hips
-    100014: mixamorig_LeftArm
-    100016: mixamorig_LeftFoot
-    100018: mixamorig_LeftForeArm
-    100020: mixamorig_LeftHand
-    100022: mixamorig_LeftLeg
-    100024: mixamorig_LeftShoulder
-    100026: mixamorig_LeftToe_End
-    100028: mixamorig_LeftToeBase
-    100030: mixamorig_LeftUpLeg
-    100032: mixamorig_Neck
-    100034: mixamorig_RightArm
-    100036: mixamorig_RightFoot
-    100038: mixamorig_RightForeArm
-    100040: mixamorig_RightHand
-    100042: mixamorig_RightLeg
-    100044: mixamorig_RightShoulder
-    100046: mixamorig_RightToe_End
-    100048: mixamorig_RightToeBase
-    100050: mixamorig_RightUpLeg
-    100052: mixamorig_Spine
-    100054: mixamorig_Spine1
-    100056: mixamorig_Spine2
-    100058: Cube
+    100004: Cube
+    100006: mixamorig:Head
+    100008: mixamorig:HeadTop_End
+    100010: mixamorig:HeadTop_End_end
+    100012: mixamorig:Hips
+    100014: mixamorig:LeftArm
+    100016: mixamorig:LeftFoot
+    100018: mixamorig:LeftForeArm
+    100020: mixamorig:LeftHand
+    100022: mixamorig:LeftHand_end
+    100024: mixamorig:LeftLeg
+    100026: mixamorig:LeftShoulder
+    100028: mixamorig:LeftToe_End
+    100030: mixamorig:LeftToe_End_end
+    100032: mixamorig:LeftToeBase
+    100034: mixamorig:LeftUpLeg
+    100036: mixamorig:Neck
+    100038: mixamorig:RightArm
+    100040: mixamorig:RightFoot
+    100042: mixamorig:RightForeArm
+    100044: mixamorig:RightHand
+    100046: mixamorig:RightHand_end
+    100048: mixamorig:RightLeg
+    100050: mixamorig:RightShoulder
+    100052: mixamorig:RightToe_End
+    100054: mixamorig:RightToe_End_end
+    100056: mixamorig:RightToeBase
+    100058: mixamorig:RightUpLeg
+    100060: mixamorig:Spine
+    100062: mixamorig:Spine1
+    100064: mixamorig:Spine2
     400000: Armature
     400002: //RootNode
-    400004: Chest
-    400006: Cube_003
-    400008: mixamorig_Head
-    400010: mixamorig_HeadTop_End
-    400012: mixamorig_Hips
-    400014: mixamorig_LeftArm
-    400016: mixamorig_LeftFoot
-    400018: mixamorig_LeftForeArm
-    400020: mixamorig_LeftHand
-    400022: mixamorig_LeftLeg
-    400024: mixamorig_LeftShoulder
-    400026: mixamorig_LeftToe_End
-    400028: mixamorig_LeftToeBase
-    400030: mixamorig_LeftUpLeg
-    400032: mixamorig_Neck
-    400034: mixamorig_RightArm
-    400036: mixamorig_RightFoot
-    400038: mixamorig_RightForeArm
-    400040: mixamorig_RightHand
-    400042: mixamorig_RightLeg
-    400044: mixamorig_RightShoulder
-    400046: mixamorig_RightToe_End
-    400048: mixamorig_RightToeBase
-    400050: mixamorig_RightUpLeg
-    400052: mixamorig_Spine
-    400054: mixamorig_Spine1
-    400056: mixamorig_Spine2
-    400058: Cube
-    2100000: unnamed
-    2100002: Bronze
-    4300000: Chest
-    4300002: Cube_003
-    4300004: Cube
-    7400000: Default Take
-    7400002: Armature_mixamo_com_Layer0
+    400004: Cube
+    400006: mixamorig:Head
+    400008: mixamorig:HeadTop_End
+    400010: mixamorig:HeadTop_End_end
+    400012: mixamorig:Hips
+    400014: mixamorig:LeftArm
+    400016: mixamorig:LeftFoot
+    400018: mixamorig:LeftForeArm
+    400020: mixamorig:LeftHand
+    400022: mixamorig:LeftHand_end
+    400024: mixamorig:LeftLeg
+    400026: mixamorig:LeftShoulder
+    400028: mixamorig:LeftToe_End
+    400030: mixamorig:LeftToe_End_end
+    400032: mixamorig:LeftToeBase
+    400034: mixamorig:LeftUpLeg
+    400036: mixamorig:Neck
+    400038: mixamorig:RightArm
+    400040: mixamorig:RightFoot
+    400042: mixamorig:RightForeArm
+    400044: mixamorig:RightHand
+    400046: mixamorig:RightHand_end
+    400048: mixamorig:RightLeg
+    400050: mixamorig:RightShoulder
+    400052: mixamorig:RightToe_End
+    400054: mixamorig:RightToe_End_end
+    400056: mixamorig:RightToeBase
+    400058: mixamorig:RightUpLeg
+    400060: mixamorig:Spine
+    400062: mixamorig:Spine1
+    400064: mixamorig:Spine2
+    2100000: Bronze
+    4300000: Cube
+    7400000: Armature|Armature|mixamo.com|Layer0
     9500000: //RootNode
-    13700000: Chest
-    13700002: Cube_003
-    13700004: Cube
+    13700000: Cube
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -125,7 +125,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

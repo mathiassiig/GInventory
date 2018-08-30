@@ -51,6 +51,11 @@ namespace GInventory
         {
             var modelInstance = Instantiate(riggedModel, transform);
             var skeletonCopier = modelInstance.GetComponentInChildren<CopySkeleton>();
+            if(skeletonCopier == null)
+            {
+                var mesh = modelInstance.GetComponentInChildren<SkinnedMeshRenderer>();
+                skeletonCopier = mesh.gameObject.AddComponent<CopySkeleton>();
+            }
             skeletonCopier.Character = _meshRenderer;
             list.Add(modelInstance);
         }
