@@ -35,10 +35,6 @@ namespace GInventory
                 else
                     item.Quantity.Value = overflow;
             }
-            foreach (var i in Items)
-            {
-                //Debug.Log(string.Format("ItemType: {0}, Quantity {1}", i.ItemType.Value, i.Quantity.Value));
-            }
             var empty = Items.FirstOrDefault(x => x.ItemType.Value == null);
             if (empty == null)
             {
