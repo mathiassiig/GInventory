@@ -20,7 +20,7 @@ namespace GInventory
 
         private ItemInstanceView _originalLiftedItem;
         private ItemInstanceView _clonedLiftedItem;
-        private float _heightDrop = 0.25f;
+        private float _heightDrop = 0.4f;
         private bool _lifting;
         private bool _hoveringUI = false;
         private bool _singleMode = false;
@@ -128,7 +128,9 @@ namespace GInventory
             _clonedLiftedItem._canvasGroup.blocksRaycasts = false;
             _clonedLiftedItem._canvasGroup.interactable = false;
             _clonedLiftedItem.SetItem(new ItemInstance(_originalLiftedItem.Item));
-            _clonedLiftedItem.GetComponent<RectTransform>().sizeDelta = new Vector2(64, 64); // todo; hacky
+            var clonedRect = _clonedLiftedItem.GetComponent<RectTransform>();
+            clonedRect.sizeDelta = new Vector2(64, 64); // todo; hacky
+            clonedRect.pivot = Vector2.one / 2f;
 
             int amount = _originalLiftedItem.Item.Quantity.Value;
             if (_singleMode)

@@ -14,7 +14,7 @@ MonoBehaviour:
   Title: Bronze Chest
   Description: Lorem ipsum
   Icon: {fileID: 21300000, guid: 1281ceb13b076924f8882f82a2828d7d, type: 3}
-  Prefab: {fileID: 1940504946822394, guid: 0565b606904998843afd2bff548ddf7a, type: 2}
+  Prefab: {fileID: 1940504946822394, guid: a903d0d82e2d5734cbfdd67bc3d7d97a, type: 2}
   MaxQuantityInStack: 1
   InstantiateIndividuals: 1
   Slot: 1
