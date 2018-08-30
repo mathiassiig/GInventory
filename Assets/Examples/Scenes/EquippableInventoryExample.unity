@@ -373,8 +373,8 @@ MonoBehaviour:
   Instantiations:
   - ItemType: {fileID: 11400000, guid: 8ad472cb68803429fa81cde5e9cc261f, type: 2}
     Quantity: 1
-  - ItemType: {fileID: 11400000, guid: e17027cf7cdc6804293706e65a59b7e9, type: 2}
-    Quantity: 5
+  - ItemType: {fileID: 11400000, guid: 18cfc66ab2be7364bae20e789534ea79, type: 2}
+    Quantity: 1
   - ItemType: {fileID: 11400000, guid: ca1508caa940c2341ab90d79640d5578, type: 2}
     Quantity: 1
   TargetInventory: {fileID: 122736644}
@@ -482,18 +482,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114477243014691014, guid: d2e7c368a571c4a668f57f20400c8e6b,
         type: 2}
-      propertyPath: SlotType
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: CharacterTarget
+      value: 
+      objectReference: {fileID: 881607784}
     - target: {fileID: 1986599214613830, guid: d2e7c368a571c4a668f57f20400c8e6b, type: 2}
       propertyPath: m_Name
       value: EquippableSlot (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 114477243014691014, guid: d2e7c368a571c4a668f57f20400c8e6b,
-        type: 2}
-      propertyPath: CharacterTarget
-      value: 
-      objectReference: {fileID: 881607784}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2e7c368a571c4a668f57f20400c8e6b, type: 2}
   m_IsPrefabAsset: 0
@@ -602,7 +597,7 @@ Prefab:
     - target: {fileID: 114477243014691014, guid: d2e7c368a571c4a668f57f20400c8e6b,
         type: 2}
       propertyPath: SlotType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1986599214613830, guid: d2e7c368a571c4a668f57f20400c8e6b, type: 2}
       propertyPath: m_Name

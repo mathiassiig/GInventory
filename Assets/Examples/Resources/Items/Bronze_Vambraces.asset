@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c6bb858f1a942ecb44e5e2b7a17d96, type: 3}
+  m_Name: Bronze_Vambraces
+  m_EditorClassIdentifier: 
+  Title: Bronze Vambraces
+  Description: Lorem ipsum
+  Icon: {fileID: 21300000, guid: bb7203d595b0c3643a75b520ff8bc551, type: 3}
+  Prefab: {fileID: 1184248404117624, guid: bb950604e220fcb418d19c98fdf68899, type: 2}
+  MaxQuantityInStack: 1
+  InstantiateIndividuals: 1
+  Slot: 3
+  StaticModels: []
+  Rigged: 1
+  RiggedModel: {fileID: 1184248404117624, guid: bb950604e220fcb418d19c98fdf68899,
+    type: 2}

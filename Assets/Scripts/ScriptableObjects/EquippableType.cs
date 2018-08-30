@@ -9,7 +9,7 @@ namespace GInventory
         Head,
         Chest,
         Legs,
-        Feet
+        Arms
     }
 
     public enum BodyTarget

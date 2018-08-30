@@ -33,6 +33,9 @@ ModelImporter:
     100054: mixamorig_Spine1
     100056: mixamorig_Spine2
     100058: Cube
+    100060: Arm
+    100062: Character
+    100064: Helmet
     400000: Armature
     400002: //RootNode
     400004: Chest
@@ -63,17 +66,26 @@ ModelImporter:
     400054: mixamorig_Spine1
     400056: mixamorig_Spine2
     400058: Cube
+    400060: Arm
+    400062: Character
+    400064: Helmet
     2100000: unnamed
     2100002: Bronze
     4300000: Chest
     4300002: Cube_003
     4300004: Cube
+    4300006: Arm
+    4300008: Helmet
+    4300010: Character
     7400000: Default Take
     7400002: Armature_mixamo_com_Layer0
     9500000: //RootNode
     13700000: Chest
     13700002: Cube_003
     13700004: Cube
+    13700006: Arm
+    13700008: Character
+    13700010: Helmet
   externalObjects: {}
   materials:
     importMaterials: 1
