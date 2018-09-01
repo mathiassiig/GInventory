@@ -19,6 +19,10 @@ namespace GInventory
 
         public override bool CanMove(ItemInstance item)
         {
+            if(item.IsEmpty)
+            {
+                return true;
+            }
             var asEquippable = item.ItemType.Value as EquippableType;
             if (asEquippable != null)
             {

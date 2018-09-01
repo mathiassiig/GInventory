@@ -79,6 +79,7 @@ namespace GInventory
             };
             Action<ItemInstance> move = (target) =>
             {
+                // merging
                 if (target.ItemType.Value == _clonedLiftedItem.Item.ItemType.Value)
                 {
                     var overflow = target.Add(_clonedLiftedItem.Item.Quantity.Value);
@@ -88,17 +89,20 @@ namespace GInventory
                     }
                     FinishLift();
                 }
+                // there is still something in the original stack, cloned stack and target stack. We are lifting a portion, you can't put that in the target stack then
                 else if (!_originalLiftedItem.IsEmpty && !_clonedLiftedItem.IsEmpty && !target.IsEmpty)
                 {
                     OnCancel();
                 }
+                // most common case, lifting a full stack onto another item
                 else
                 {
                     var targetBefore = new ItemInstance(target);
-                    bool success = target.Set(_clonedLiftedItem.Item);
+                    bool success = target.CanMove(_clonedLiftedItem.Item) && _originalLiftedItem.CanMove(targetBefore);
                     if (success)
                     {
-                        if(_originalLiftedItem.IsEmpty)
+                        target.Set(_clonedLiftedItem.Item);
+                        if (_originalLiftedItem.IsEmpty)
                         {
                             _originalLiftedItem.Item.Set(targetBefore);
                         }

@@ -19,6 +19,15 @@ namespace GInventory
             }
         }
 
+        public virtual bool CanMove(ItemInstance i)
+        {
+            if(IsEmpty)
+            {
+                return true;
+            }
+            return ItemType.Value.CanMove(i);
+        }
+
         public ItemInstance()
         {
             Clear();

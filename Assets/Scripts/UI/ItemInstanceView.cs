@@ -48,7 +48,14 @@ namespace GInventory
 
         public virtual bool CanMove(ItemInstance i)
         {
-            return true;
+            if (IsEmpty)
+            {
+                return true;
+            }
+            else
+            {
+                return Item.ItemType.Value.CanMove(i);
+            }
         }
 
         protected void Setup()
