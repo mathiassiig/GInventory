@@ -88,13 +88,20 @@ namespace GInventory
                     }
                     FinishLift();
                 }
+                else if (!_originalLiftedItem.IsEmpty && !_clonedLiftedItem.IsEmpty && !target.IsEmpty)
+                {
+                    OnCancel();
+                }
                 else
                 {
                     var targetBefore = new ItemInstance(target);
                     bool success = target.Set(_clonedLiftedItem.Item);
                     if (success)
                     {
-                        _originalLiftedItem.Item.Set(targetBefore);
+                        if(_originalLiftedItem.IsEmpty)
+                        {
+                            _originalLiftedItem.Item.Set(targetBefore);
+                        }
                         FinishLift();
                     }
                     else

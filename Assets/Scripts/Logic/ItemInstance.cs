@@ -11,6 +11,14 @@ namespace GInventory
         public ReactiveProperty<int> Quantity = new ReactiveProperty<int>();
         public ReactiveProperty<ItemType> ItemType = new ReactiveProperty<ItemType>();
 
+        public bool IsEmpty
+        {
+            get
+            {
+                return ItemType.Value == null;
+            }
+        }
+
         public ItemInstance()
         {
             Clear();

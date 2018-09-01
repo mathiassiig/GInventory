@@ -20,7 +20,7 @@ namespace GInventory
         {
             get
             {
-                return Item.ItemType.Value == null;
+                return Item.IsEmpty;
             }
         }
         protected ItemInstance _item;
