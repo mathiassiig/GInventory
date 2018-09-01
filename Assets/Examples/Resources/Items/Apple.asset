@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Apple
   Description: A favorite among horses
-  Icon: {fileID: 21300000, guid: e498ffce64a4b554287eb3dcff4e7c12, type: 3}
+  Icon: {fileID: 21300000, guid: 91cc1eff93e6266428992ed1699e3a42, type: 3}
   Prefab: {fileID: 1785260726327006, guid: cc1460209a34a5e41bfa304c7d7df104, type: 2}
   MaxQuantityInStack: 8
   InstantiateIndividuals: 1

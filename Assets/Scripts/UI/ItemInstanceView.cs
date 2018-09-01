@@ -119,8 +119,15 @@ namespace GInventory
                 }
                 else
                 {
-                    _quantityLabel.gameObject.SetActive(true);
-                    _quantityLabel.text = quantity.ToString();
+                    if(quantity == 1 && !InventorySettingsManager.Settings.ShowQuantityLabelIfSingle)
+                    {
+                        _quantityLabel.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        _quantityLabel.gameObject.SetActive(true);
+                        _quantityLabel.text = quantity.ToString();
+                    }
                 }
             });
         }
